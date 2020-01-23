@@ -1,0 +1,10 @@
+.idea
+.cache
+.env
+.DS_Store
+.cache/
+.dist/
+.coverage/
+.env
+node_modules
+dist
