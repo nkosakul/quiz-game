@@ -11,9 +11,16 @@
   z-index: 9;
 
   .modal-body {
+    position: relative;
     background-color: $c-white;
     padding: 2rem;
     border-radius: 20px
+  }
+
+  small {
+    display: block;
+    text-align: right;
+    font-size: 16px;
   }
 
   .question-title {
@@ -22,6 +29,8 @@
   }
 
   .answer-text {
+    margin-top: 2rem;
+    margin-bottom: 0;
     font-size: 40px;
     font-weight: 600;
     text-align: center;
@@ -35,5 +44,15 @@
     grid-gap: 40px;
     -ms-grid-columns: 1fr 1fr;
     grid-template-columns: repeat(2, 1fr);
+    margin-top: 2rem;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    color: $c-white;
+    font-size: 30px;
+    font-weight: 700;
   }
 }

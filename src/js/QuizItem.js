@@ -42,8 +42,8 @@ const QuizItem = ({ question, points, answer, categoryColor }) => {
               <table className="table">
                 {players.map(({ id, name, answer }) => (
                   <tr key={id}>
-                    <td>{name}</td>
-                    <td>{answer}</td>
+                    <td className="name">{name}</td>
+                    <td className="answer">{answer}</td>
                   </tr>
                 ))}
               </table>
