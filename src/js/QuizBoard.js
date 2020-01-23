@@ -7,13 +7,16 @@ const QuizBoard = () => {
 
   return (
     <div className="grid">
-      {quizCategories.map(({ category, categoryID, questions }) => (
-        <QuizCategory
-          key={categoryID}
-          category={category}
-          questions={questions}
-        />
-      ))}
+      {quizCategories.map(
+        ({ category, categoryID, questions, categoryColor }) => (
+          <QuizCategory
+            key={categoryID}
+            categoryColor={categoryColor}
+            category={category}
+            questions={questions}
+          />
+        )
+      )}
     </div>
   );
 };
