@@ -1,0 +1,19 @@
+h1,
+.is-h1,
+h2,
+.is-h2,
+h3,
+.is-h3,
+h4,
+.is-h4,
+h5 {
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.quiz-title {
+  text-align: center;
+  font-size: 25px;
+  margin-bottom: 20px;
+}

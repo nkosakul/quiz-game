@@ -1,0 +1,68 @@
+{
+  "quizCategories": [
+    {
+      "categoryID": 1,
+      "category": "Movies",
+      "questions": [
+        {
+          "id": 1,
+          "points": 100,
+          "question": "How are you today?",
+          "questionType": "string",
+          "answer": "good",
+          "isActive": false,
+          "isAlreadyAnswered": false,
+          "userAnswers": []
+        }
+      ]
+    },
+    {
+      "categoryID": 2,
+      "category": "3pc",
+      "questions": [
+        {
+          "id": 2,
+          "points": 100,
+          "question": "How many employees does 3pc have?",
+          "questionType": "number",
+          "answer": 80,
+          "isActive": false,
+          "isAlreadyAnswered": false,
+          "userAnswers": []
+        }
+      ]
+    },
+    {
+      "categoryID": 3,
+      "category": "Sci-Fi",
+      "questions": [
+        {
+          "id": 3,
+          "points": 100,
+          "question": "Star Wars or Star Trek?",
+          "questionType": "string",
+          "answer": "Star Wars",
+          "isActive": false,
+          "isAlreadyAnswered": false,
+          "userAnswers": []
+        }
+      ]
+    },
+    {
+      "categoryID": 4,
+      "category": "Sport",
+      "questions": [
+        {
+          "id": 4,
+          "points": 100,
+          "question": "How many trophies dows Messi have?",
+          "questionType": "number",
+          "answer": 6,
+          "isActive": false,
+          "isAlreadyAnswered": false,
+          "userAnswers": []
+        }
+      ]
+    }
+  ]
+}

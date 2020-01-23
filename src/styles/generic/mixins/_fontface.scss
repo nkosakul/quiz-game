@@ -1,0 +1,15 @@
+@mixin fontFace($family, $src, $style: normal, $weight: normal) {
+  @font-face {
+    font-weight: $weight;
+    font-family: $family;
+    font-style: $style;
+    font-display: block;
+    src: url('#{$src}.eot'); /* IE9 Compat Modes */
+    src: url('#{$src}.woff') format('woff'), url('#{$src}.eot') format('eot'),
+      url('#{$src}.eot') format('embedded-opentype'),
+      /* IE6-IE8 */ url('#{$src}.woff2') format('woff2'),
+      /* Super Modern Browsers */ url('#{$src}.woff') format('woff'),
+      /* Modern Browsers */ url('#{$src}.ttf') format('truetype'),
+      /* Safari, Android, iOS */ url('#{$src}.svg') format('svg'); /* Legacy iOS */
+  }
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Router, Link } from '@reach/router';
 import QuizBoard from './QuizBoard';
+import '../styles/index.scss';
 
 const App = () => {
   return (

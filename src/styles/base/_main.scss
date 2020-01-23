@@ -1,0 +1,17 @@
+html {
+  @include font($f-family, $f-weight-regular, $f-size, 1.4);
+
+  @include mq(small) {
+    font-size: 18px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+
+}
+
+body {
+  background-color: $c-ci;
+  color: $c-gray-dark;
+}

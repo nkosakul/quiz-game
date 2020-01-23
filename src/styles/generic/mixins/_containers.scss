@@ -1,0 +1,38 @@
+$grid-max: 1920px;
+$grid-big: 1440px;
+$grid-medium: 1280px;
+$grid-small: 1060px;
+
+$grid-space: 80px;
+$grid-medium-space: 40px;
+$grid-small-space: 20px;
+
+// for full-width elements. We don´t want them to scale wider than that.
+@mixin container-max {
+  width: 100%;
+  max-width: $grid-max;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+// the default container for most of the elements
+@mixin container {
+  width: 100%;
+  max-width: calc(#{$grid-max} + #{$grid-space * 2});
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $grid-space;
+  padding-left: $grid-space;
+
+  @include mq(large) {
+    max-width: calc(#{$grid-max} + #{$grid-medium-space * 2});
+    padding-right: $grid-medium-space;
+    padding-left: $grid-medium-space;
+  }
+
+  @include mq(small) {
+    max-width: calc(#{$grid-max} + #{$grid-small-space * 2});
+    padding-right: $grid-small-space;
+    padding-left: $grid-small-space;
+  }
+}

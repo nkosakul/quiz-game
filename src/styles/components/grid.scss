@@ -1,0 +1,15 @@
+.grid {
+  @include container;
+
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-gap: 40px;
+  grid-gap: 40px;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
+
+  @include mq(medium) {
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

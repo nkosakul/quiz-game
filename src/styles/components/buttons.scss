@@ -1,0 +1,44 @@
+@mixin reset-btn {
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+button {
+  @include reset-btn;
+}
+
+.button {
+  @include reset-btn;
+
+  padding: 20px 20px;
+  color: $c-white;
+  font-weight: $f-weight-semibold;
+  font-size: 20px;
+  background-color: $c-blue;
+
+  &:hover,
+  &.focus-visible {
+    color: $c-blue;
+    background-color: $c-white;
+  }
+
+  &--orange {
+    background-color: $c-orange;
+  }
+
+  &--blue {
+    background-color: $c-blue;
+  }
+
+  &--green {
+    background-color: $c-green;
+  }
+
+  &--fullwidth {
+    width: 100%;
+  }
+}
