@@ -70,13 +70,15 @@
       "id": 1,
       "name": "Player 1",
       "answered": false,
-      "answer": "test"
+      "answer": "test",
+      "points": 0
     },
     {
       "id": 2,
       "name": "Player 2",
       "answered": false,
-      "answer": "test 2"
+      "answer": "test 2",
+      "points": 0
     }
   ]
 }
