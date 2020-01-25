@@ -1,19 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import QuizCategory from './QuizCategory';
-import data from '../../data';
 
-const QuizBoard = () => {
-  const quizCategories = data.quizCategories;
-
+const QuizBoard = ({quizCategories}) => {
   return (
     <div className="grid">
       {quizCategories.map(
-        ({ category, categoryID, questions, categoryColor }) => (
+        ({ category, categoryID, categoryColor }) => (
           <QuizCategory
             key={categoryID}
             categoryColor={categoryColor}
+            categoryID={categoryID}
             category={category}
-            questions={questions}
           />
         )
       )}
@@ -21,4 +19,8 @@ const QuizBoard = () => {
   );
 };
 
-export default QuizBoard;
+const mapStateToProps = (state) => {
+  return state;
+};
+
+export default connect(mapStateToProps)(QuizBoard);
