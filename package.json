@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel src/index.html",
+    "build": "parcel build src/index.html",
     "format": "prettier \"src/**/*.{js,html}\" --write",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -34,9 +35,16 @@
     "sass": "^1.25.0"
   },
   "dependencies": {
+    "@apollo/react-hooks": "^3.1.3",
     "@babel/plugin-transform-runtime": "^7.7.6",
     "@frontendmasters/pet": "^1.0.3",
     "@reach/router": "^1.2.1",
+    "apollo-boost": "^0.4.7",
+    "apollo-cache-inmemory": "^1.6.5",
+    "dotenv": "^8.2.0",
+    "faunadb": "^2.11.1",
+    "graphql": "^14.5.8",
+    "node-fetch": "^2.6.0",
     "react": "^16.8.3",
     "react-dom": "15.x || 16.x || 16.4.0-alpha.0911da3",
     "react-redux": "^7.1.3",

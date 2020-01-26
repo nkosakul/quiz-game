@@ -3,8 +3,12 @@
 .env
 .DS_Store
 .cache/
+.netlify/
 .dist/
 .coverage/
 .env
 node_modules
 dist
+
+# Local Netlify folder
+.netlify

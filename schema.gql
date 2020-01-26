@@ -1,0 +1,22 @@
+type Category {
+   id: ID! @unique
+   title: String!
+   color: String!
+   questions: [Question]
+}
+
+type Question {
+   id: ID! @unique
+   points: Int!
+   question: String!
+   type: String!
+   category: String!
+   answer: String!
+   isActive: Boolean!
+   owner: Category!
+}
+
+type Query {
+   allQuestions: [Question!]
+   allCategories: [Category!]
+}
