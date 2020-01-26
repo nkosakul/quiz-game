@@ -8,6 +8,7 @@ const ALL_CATEGORIES = gql`
     allCategories {
       data {
         questions {
+          _id
           id
           question
           type

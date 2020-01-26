@@ -26,7 +26,7 @@ const Header = () => {
   }
 
   const allQuestions = data.allQuestions.data;
-  console.log(allQuestions);
+  // console.log(allQuestions);
 
   return (
     <header>
@@ -34,7 +34,7 @@ const Header = () => {
         Logo
         {allQuestions.map(({question, isActive}) => {
           if (isActive) {
-            return <p>{question}</p>
+            return <p key={question}>{question}</p>
           }
         })}
       </Link>

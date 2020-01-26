@@ -1,11 +1,63 @@
 import React, { useState } from 'react';
+import {gql} from "apollo-boost/lib/index";
+import { useMutation } from '@apollo/react-hooks'
 import Modal from './Modal';
 
-const QuizItem = ({ players, id, question, points, answer, isActive, color }) => {
+const UPDATE_QUESTION = gql`
+  mutation UpdateAQuestion {
+    updateQuestion(
+      id: "255572166159893011"
+      data: {
+        id: "q1"
+        question: "How old is Nat?"
+        type: "String"
+        points: 100
+        category: "Nat"
+        answer: "28"
+        isActive: true
+        owner: { connect: "255570940675490323" }
+      }
+    ) {
+      id
+      question
+      type
+      points
+      category
+      answer
+      isActive
+      owner {
+        id
+      }
+    }
+  }
+`;
+
+const GET_QUESTION = id => gql`
+  {
+    findQuestionByID(id: "255572166159893011") {
+      id
+    }
+  }
+`;
+
+const QuizItem = ({ question, categoryID, color }) => {
   const [showModal, setShowModal] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
   const [isAnswered, setIsAnswered] = useState(false);
   const [showPlayerAnswers, setShowPlayerAnswers] = useState(false);
+  const [updateQuestion] = useMutation(
+    UPDATE_QUESTION,
+    {
+      update(cache, { data: { updateQuestion } }) {
+        const test = cache.readQuery({ query: GET_QUESTION(question._id) });
+        console.log(test);
+        // cache.writeQuery({
+        //   query: GET_QUESTION(question._id),
+        //   data: { todos: todos.concat([updateQuestion]) },
+        // });
+      }
+    }
+  );
   const count = 0;
 
   const handleClosingModal = () => {
@@ -15,8 +67,11 @@ const QuizItem = ({ players, id, question, points, answer, isActive, color }) =>
 
   const handleOpenModal = () => {
     setShowModal(true);
-
-    // TODO: set active question
+    updateQuestion({
+      variables: {
+        type: question
+      }
+    });
   };
 
   return (
@@ -26,7 +81,7 @@ const QuizItem = ({ players, id, question, points, answer, isActive, color }) =>
         onClick={() => handleOpenModal()}
         disabled={isAnswered}
       >
-        {points}
+        {question.points}
       </button>
 
       {showModal ? (
@@ -38,9 +93,9 @@ const QuizItem = ({ players, id, question, points, answer, isActive, color }) =>
             <small>
               {count} / 2
             </small>
-            <h2 className="question-title">{question}</h2>
+            <h2 className="question-title">{question.question}</h2>
 
-            {showAnswer ? <p className="answer-text">{answer}</p> : null}
+            {showAnswer ? <p className="answer-text">{question.answer}</p> : null}
 
             {showPlayerAnswers ? (
               <table className="table">
