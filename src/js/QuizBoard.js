@@ -7,9 +7,17 @@ const ALL_CATEGORIES = gql`
   query getAllCategories {
     allCategories {
       data {
-        color
+        questions {
+          id
+          question
+          type
+          answer
+          points
+          isActive
+        }
         id
         title
+        color
       }
     }
   }
@@ -31,12 +39,13 @@ const QuizBoard = () => {
   return (
     <div className="grid">
       {quizCategories.map(
-        ({ id, title, color }) => (
+        ({ id, title, color, questions }) => (
           <QuizCategory
             key={id}
             color={color}
             id={id}
             title={title}
+            questions={questions}
           />
         )
       )}
