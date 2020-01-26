@@ -4,18 +4,18 @@ import { useMutation } from '@apollo/react-hooks'
 import Modal from './Modal';
 
 const UPDATE_QUESTION = gql`
-  mutation UpdateAQuestion {
+  mutation UpdateAQuestion($_id: ID!, $id: ID!, $points: Int!, $question: String!, $type: String!, $category: String!, $answer: String!, $categoryID: ID!) {
     updateQuestion(
-      id: "255572166159893011"
+      id: $_id
       data: {
-        id: "q1"
-        question: "How old is Nat?"
-        type: "String"
-        points: 100
-        category: "Nat"
-        answer: "28"
+        id: $id
+        question: $question
+        type: $type
+        points: $points
+        category: $category
+        answer: $answer
         isActive: true
-        owner: { connect: "255570940675490323" }
+        owner: { connect: $categoryID }
       }
     ) {
       id
@@ -32,32 +32,20 @@ const UPDATE_QUESTION = gql`
   }
 `;
 
-const GET_QUESTION = id => gql`
-  {
-    findQuestionByID(id: "255572166159893011") {
-      id
-    }
-  }
-`;
+// const GET_QUESTION = id => gql`
+//   {
+//     findQuestionByID(id: "${id}") {
+//       id
+//     }
+//   }
+// `;
 
-const QuizItem = ({ question, categoryID, color }) => {
+const QuizItem = ({ questionObj, categoryID, color }) => {
   const [showModal, setShowModal] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
   const [isAnswered, setIsAnswered] = useState(false);
   const [showPlayerAnswers, setShowPlayerAnswers] = useState(false);
-  const [updateQuestion] = useMutation(
-    UPDATE_QUESTION,
-    {
-      update(cache, { data: { updateQuestion } }) {
-        const test = cache.readQuery({ query: GET_QUESTION(question._id) });
-        console.log(test);
-        // cache.writeQuery({
-        //   query: GET_QUESTION(question._id),
-        //   data: { todos: todos.concat([updateQuestion]) },
-        // });
-      }
-    }
-  );
+  const [updateQuestion] = useMutation(UPDATE_QUESTION);
   const count = 0;
 
   const handleClosingModal = () => {
@@ -66,12 +54,30 @@ const QuizItem = ({ question, categoryID, color }) => {
   };
 
   const handleOpenModal = () => {
-    setShowModal(true);
+    const {
+      _id,
+      id,
+      question,
+      type,
+      points,
+      category,
+      answer
+    } = questionObj;
+
     updateQuestion({
       variables: {
-        type: question
+        _id,
+        id,
+        question,
+        type,
+        points,
+        category,
+        answer,
+        categoryID
       }
     });
+
+    setShowModal(true);
   };
 
   return (
@@ -81,7 +87,7 @@ const QuizItem = ({ question, categoryID, color }) => {
         onClick={() => handleOpenModal()}
         disabled={isAnswered}
       >
-        {question.points}
+        {questionObj.points}
       </button>
 
       {showModal ? (
@@ -93,9 +99,9 @@ const QuizItem = ({ question, categoryID, color }) => {
             <small>
               {count} / 2
             </small>
-            <h2 className="question-title">{question.question}</h2>
+            <h2 className="question-title">{questionObj.question}</h2>
 
-            {showAnswer ? <p className="answer-text">{question.answer}</p> : null}
+            {showAnswer ? <p className="answer-text">{questionObj.answer}</p> : null}
 
             {showPlayerAnswers ? (
               <table className="table">

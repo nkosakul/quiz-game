@@ -15,7 +15,9 @@ const ALL_CATEGORIES = gql`
           answer
           points
           isActive
+          category
         }
+        _id
         id
         title
         color
@@ -40,11 +42,11 @@ const QuizBoard = () => {
   return (
     <div className="grid">
       {quizCategories.map(
-        ({ id, title, color, questions }) => (
+        ({ _id, title, color, questions }) => (
           <QuizCategory
-            key={id}
+            key={_id}
             color={color}
-            id={id}
+            id={_id}
             title={title}
             questions={questions}
           />

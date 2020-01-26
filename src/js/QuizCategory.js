@@ -9,10 +9,10 @@ const QuizCategory = ({ id, title, color, questions }) => {
       <h2 className="quiz-title">{title}</h2>
       {questions.map(question => (
         <QuizItem
-          key={question.id}
+          key={id}
           categoryID={id}
           color={color}
-          question={question}
+          questionObj={question}
         />
       ))}
     </div>
