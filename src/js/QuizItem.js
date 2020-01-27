@@ -12,6 +12,7 @@ const UPDATE_QUESTION = gql`
     $type: String!
     $category: String!
     $answer: String!
+    $isActive: Boolean!
     $categoryID: ID!
   ) {
     updateQuestion(
@@ -23,7 +24,7 @@ const UPDATE_QUESTION = gql`
         points: $points
         category: $category
         answer: $answer
-        isActive: true
+        isActive: $isActive
         owner: { connect: $categoryID }
       }
     ) {
@@ -40,14 +41,6 @@ const UPDATE_QUESTION = gql`
     }
   }
 `;
-
-// const GET_QUESTION = id => gql`
-//   {
-//     findQuestionByID(id: "${id}") {
-//       id
-//     }
-//   }
-// `;
 
 const QuizItem = ({ questionObj, categoryID, color }) => {
   const [showModal, setShowModal] = useState(false);
@@ -74,6 +67,7 @@ const QuizItem = ({ questionObj, categoryID, color }) => {
         points,
         category,
         answer,
+        isActive: true,
         categoryID,
       },
     });
