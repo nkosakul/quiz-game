@@ -1,7 +1,6 @@
 import React from 'react';
 import QuizItem from './QuizItem';
-import {gql} from "apollo-boost/lib/index";
-
+import { gql } from 'apollo-boost/lib/index';
 
 const QuizCategory = ({ id, title, color, questions }) => {
   return (

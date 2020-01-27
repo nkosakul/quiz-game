@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from '@reach/router';
-import {gql} from "apollo-boost/lib/index";
-import {useQuery} from "@apollo/react-hooks/lib/index";
+import { gql } from 'apollo-boost/lib/index';
+import { useQuery } from '@apollo/react-hooks/lib/index';
 
 const ALL_QUESTIONS = gql`
   {
@@ -18,11 +18,11 @@ const Header = () => {
   const { loading, error, data } = useQuery(ALL_QUESTIONS);
 
   if (loading) {
-    return <p>loading...</p>
+    return <p>loading...</p>;
   }
 
   if (error) {
-    return <p>error!</p>
+    return <p>error!</p>;
   }
 
   const allQuestions = data.allQuestions.data;
@@ -32,9 +32,9 @@ const Header = () => {
     <header>
       <Link to="/">
         Logo
-        {allQuestions.map(({question, isActive}) => {
+        {allQuestions.map(({ question, isActive }) => {
           if (isActive) {
-            return <p key={question}>{question}</p>
+            return <p key={question}>{question}</p>;
           }
         })}
       </Link>

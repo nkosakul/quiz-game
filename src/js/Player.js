@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from "react-redux";
+import { connect } from 'react-redux';
 
 const Player = ({ id, questions }) => {
   console.log(questions);
@@ -12,12 +12,12 @@ const Player = ({ id, questions }) => {
           <h3>{question.question}</h3>
           <h4>{question.isActive ? 'true' : 'False'}</h4>
         </div>
-        ))}
+      ))}
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return state;
 };
 

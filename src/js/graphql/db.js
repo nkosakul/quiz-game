@@ -1,7 +1,7 @@
 import ApolloClient from 'apollo-boost';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { gql } from "apollo-boost";
-import fetch from "node-fetch";
+import { gql } from 'apollo-boost';
+import fetch from 'node-fetch';
 require('dotenv').config();
 
 const client = new ApolloClient({
@@ -11,7 +11,7 @@ const client = new ApolloClient({
   request: operation => {
     operation.setContext({
       headers: {
-        "authorization": `Basic ${process.env.FAUNADB_SERVER_SECRET}`
+        authorization: `Basic ${process.env.FAUNADB_SERVER_SECRET}`,
       },
     });
   },

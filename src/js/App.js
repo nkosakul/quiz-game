@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Router } from '@reach/router';
 import { useQuery } from '@apollo/react-hooks';
-import { gql } from "apollo-boost";
+import { gql } from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import Header from './Header';
 import QuizBoard from './QuizBoard';

@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
-import {gql} from "apollo-boost/lib/index";
-import { useMutation } from '@apollo/react-hooks'
+import { gql } from 'apollo-boost/lib/index';
+import { useMutation } from '@apollo/react-hooks';
 import Modal from './Modal';
 
 const UPDATE_QUESTION = gql`
-  mutation UpdateAQuestion($_id: ID!, $id: ID!, $points: Int!, $question: String!, $type: String!, $category: String!, $answer: String!, $categoryID: ID!) {
+  mutation UpdateAQuestion(
+    $_id: ID!
+    $id: ID!
+    $points: Int!
+    $question: String!
+    $type: String!
+    $category: String!
+    $answer: String!
+    $categoryID: ID!
+  ) {
     updateQuestion(
       id: $_id
       data: {
@@ -54,15 +63,7 @@ const QuizItem = ({ questionObj, categoryID, color }) => {
   };
 
   const handleOpenModal = () => {
-    const {
-      _id,
-      id,
-      question,
-      type,
-      points,
-      category,
-      answer
-    } = questionObj;
+    const { _id, id, question, type, points, category, answer } = questionObj;
 
     updateQuestion({
       variables: {
@@ -73,8 +74,8 @@ const QuizItem = ({ questionObj, categoryID, color }) => {
         points,
         category,
         answer,
-        categoryID
-      }
+        categoryID,
+      },
     });
 
     setShowModal(true);
@@ -96,21 +97,21 @@ const QuizItem = ({ questionObj, categoryID, color }) => {
             X
           </button>
           <div>
-            <small>
-              {count} / 2
-            </small>
+            <small>{count} / 2</small>
             <h2 className="question-title">{questionObj.question}</h2>
 
-            {showAnswer ? <p className="answer-text">{questionObj.answer}</p> : null}
+            {showAnswer ? (
+              <p className="answer-text">{questionObj.answer}</p>
+            ) : null}
 
             {showPlayerAnswers ? (
               <table className="table">
                 <tbody>
                   {/*{players.map(({ id, name, answer }) => (*/}
-                    {/*<tr key={id}>*/}
-                      {/*<td className="name">{name}</td>*/}
-                      {/*<td className="answer">{answer}</td>*/}
-                    {/*</tr>*/}
+                  {/*<tr key={id}>*/}
+                  {/*<td className="name">{name}</td>*/}
+                  {/*<td className="answer">{answer}</td>*/}
+                  {/*</tr>*/}
                   {/*))}*/}
                 </tbody>
               </table>

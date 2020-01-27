@@ -30,31 +30,28 @@ const QuizBoard = () => {
   const { loading, error, data } = useQuery(ALL_CATEGORIES);
 
   if (loading) {
-    return <p>loading...</p>
+    return <p>loading...</p>;
   }
 
   if (error) {
-    return <p>error!</p>
+    return <p>error!</p>;
   }
 
   const quizCategories = data.allCategories.data;
 
   return (
     <div className="grid">
-      {quizCategories.map(
-        ({ _id, title, color, questions }) => (
-          <QuizCategory
-            key={_id}
-            color={color}
-            id={_id}
-            title={title}
-            questions={questions}
-          />
-        )
-      )}
+      {quizCategories.map(({ _id, title, color, questions }) => (
+        <QuizCategory
+          key={_id}
+          color={color}
+          id={_id}
+          title={title}
+          questions={questions}
+        />
+      ))}
     </div>
   );
 };
-
 
 export default QuizBoard;
