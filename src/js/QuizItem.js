@@ -1,46 +1,7 @@
 import React, { useState } from 'react';
-import { gql } from 'apollo-boost/lib/index';
 import { useMutation } from '@apollo/react-hooks';
 import Modal from './Modal';
-
-const UPDATE_QUESTION = gql`
-  mutation UpdateAQuestion(
-    $_id: ID!
-    $id: ID!
-    $points: Int!
-    $question: String!
-    $type: String!
-    $category: String!
-    $answer: String!
-    $isActive: Boolean!
-    $categoryID: ID!
-  ) {
-    updateQuestion(
-      id: $_id
-      data: {
-        id: $id
-        question: $question
-        type: $type
-        points: $points
-        category: $category
-        answer: $answer
-        isActive: $isActive
-        owner: { connect: $categoryID }
-      }
-    ) {
-      id
-      question
-      type
-      points
-      category
-      answer
-      isActive
-      owner {
-        id
-      }
-    }
-  }
-`;
+import { UPDATE_QUESTION } from './graphql/mutations';
 
 const QuizItem = ({ questionObj, categoryID, color }) => {
   const [showModal, setShowModal] = useState(false);
@@ -48,14 +9,8 @@ const QuizItem = ({ questionObj, categoryID, color }) => {
   const [isAnswered, setIsAnswered] = useState(false);
   const [showPlayerAnswers, setShowPlayerAnswers] = useState(false);
   const [updateQuestion] = useMutation(UPDATE_QUESTION);
-  const count = 0;
 
-  const handleClosingModal = () => {
-    setShowModal(false);
-    setIsAnswered(true);
-  };
-
-  const handleOpenModal = () => {
+  const handleUpdateQuestion = isActive => {
     const { _id, id, question, type, points, category, answer } = questionObj;
 
     updateQuestion({
@@ -67,12 +22,21 @@ const QuizItem = ({ questionObj, categoryID, color }) => {
         points,
         category,
         answer,
-        isActive: true,
+        isActive,
         categoryID,
       },
     });
+  };
 
+  const handleClosingModal = () => {
+    setShowModal(false);
+    setIsAnswered(true);
+    handleUpdateQuestion(false);
+  };
+
+  const handleOpenModal = () => {
     setShowModal(true);
+    handleUpdateQuestion(true);
   };
 
   return (
@@ -91,7 +55,6 @@ const QuizItem = ({ questionObj, categoryID, color }) => {
             X
           </button>
           <div>
-            <small>{count} / 2</small>
             <h2 className="question-title">{questionObj.question}</h2>
 
             {showAnswer ? (

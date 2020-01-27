@@ -1,30 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
 import QuizCategory from './QuizCategory';
-
-const ALL_CATEGORIES = gql`
-  query getAllCategories {
-    allCategories {
-      data {
-        questions {
-          _id
-          id
-          question
-          type
-          answer
-          points
-          isActive
-          category
-        }
-        _id
-        id
-        title
-        color
-      }
-    }
-  }
-`;
+import { ALL_CATEGORIES } from './graphql/queries';
 
 const QuizBoard = () => {
   const { loading, error, data } = useQuery(ALL_CATEGORIES);
