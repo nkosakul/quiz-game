@@ -1,24 +1,27 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { GET_PLAYER_BY_ID } from './graphql/queries';
+import { useQuery } from '@apollo/react-hooks';
 
-const Player = ({ id, questions }) => {
-  console.log(questions);
-  console.log(id);
+const Player = () => {
+  const { loading, error, data } = useQuery(
+    GET_PLAYER_BY_ID('255728801404682771')
+  );
+
+  if (loading) {
+    return <p>loading...</p>;
+  }
+
+  if (error) {
+    return <p>error!</p>;
+  }
+
+  const player = data.findPlayerByID;
+
   return (
     <div className="player">
-      <h2 className="player-name">as</h2>
-      {questions.map(question => (
-        <div key={question.id}>
-          <h3>{question.question}</h3>
-          <h4>{question.isActive ? 'true' : 'False'}</h4>
-        </div>
-      ))}
+      <h2 className="player-name">{player.name}</h2>
     </div>
   );
 };
 
-const mapStateToProps = state => {
-  return state;
-};
-
-export default connect(mapStateToProps)(Player);
+export default Player;

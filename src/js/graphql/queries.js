@@ -22,3 +22,14 @@ export const ALL_CATEGORIES = gql`
     }
   }
 `;
+
+export const GET_PLAYER_BY_ID = id => gql`
+  {
+     findPlayerByID(id: "${id}") {
+       id
+       name
+       answer
+       points
+     }
+   }
+`;

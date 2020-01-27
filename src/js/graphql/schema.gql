@@ -16,7 +16,15 @@ type Question {
    owner: Category!
 }
 
+type Player {
+   id: ID! @uniquea
+   name: String!
+   answer: String
+   points: Int
+}
+
 type Query {
    allQuestions: [Question!]
    allCategories: [Category!]
+   allPlayers: [Player!]
 }
