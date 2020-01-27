@@ -44,6 +44,7 @@
     "dotenv": "^8.2.0",
     "faunadb": "^2.11.1",
     "graphql": "^14.5.8",
+    "netlify-cli": "^2.30.0",
     "node-fetch": "^2.6.0",
     "react": "^16.8.3",
     "react-dom": "15.x || 16.x || 16.4.0-alpha.0911da3",

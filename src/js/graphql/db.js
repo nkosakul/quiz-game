@@ -1,6 +1,5 @@
 import ApolloClient from 'apollo-boost';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { gql } from 'apollo-boost';
 import fetch from 'node-fetch';
 require('dotenv').config();
 
