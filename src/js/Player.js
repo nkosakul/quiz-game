@@ -7,6 +7,12 @@ const Player = () => {
     GET_PLAYER_BY_ID('255728801404682771')
   );
 
+  // const [login, { loading, error }] = useMutation<LoginTypes.login, LoginTypes.loginVariables>(
+  //   LOGIN_USER,
+  //     {
+  //       onCompleted({ login }) {        localStorage.setItem('token', login as string);        client.writeData({ data: { isLoggedIn: true } });      }    }
+  // );
+
   if (loading) {
     return <p>loading...</p>;
   }

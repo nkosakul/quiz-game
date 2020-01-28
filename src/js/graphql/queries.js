@@ -35,10 +35,11 @@ export const GET_PLAYER_BY_ID = id => gql`
 `;
 
 export const GET_ALL_CATEGORIES = gql`
-{
-  category {
-    id
-    name
-    color
+  {
+    category {
+      id
+      name
+      color
+    }
   }
-}`;
+`;

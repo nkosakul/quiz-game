@@ -11,23 +11,21 @@ const QuizBoard = () => {
   }
 
   if (error) {
-    console.log(error);
-    return <p>error!</p>
+    return <p>error!</p>;
   }
-
-  // const quizCategories = data.allCategories.data;
+  const quizCategories = data.category;
 
   return (
     <div className="grid">
-      {/*{quizCategories.map(({ _id, title, color, questions }) => (*/}
-        {/*<QuizCategory*/}
-          {/*key={_id}*/}
-          {/*color={color}*/}
-          {/*id={_id}*/}
-          {/*title={title}*/}
-          {/*questions={questions}*/}
-        {/*/>*/}
-      {/*))}*/}
+      {quizCategories.map(({ _id, title, color, questions }) => (
+        <QuizCategory
+          key={_id}
+          color={color}
+          id={_id}
+          title={title}
+          questions={questions}
+        />
+      ))}
     </div>
   );
 };

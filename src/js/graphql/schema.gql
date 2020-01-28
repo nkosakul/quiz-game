@@ -1,23 +1,21 @@
 type Category {
    id: ID! @unique
-   title: String!
+   name: String!
    color: String!
-   questions: [Question]
 }
 
 type Question {
    id: ID! @unique
-   points: Int!
    question: String!
    type: String!
    category: String!
    answer: String!
+   points: Int!
    isActive: Boolean!
-   owner: Category!
 }
 
 type Player {
-   id: ID! @uniquea
+   id: ID! @unique
    name: String!
    answer: String
    points: Int
