@@ -15,6 +15,7 @@ const App = () => {
         <Header />
         <Router>
           <QuizBoard path="/quiz" />
+          <QuizBoard path="/quiz/:admin" />
           <Player path="/player/:id" />
         </Router>
       </ApolloProvider>

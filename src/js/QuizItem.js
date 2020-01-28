@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/react-hooks';
 import Modal from './Modal';
 import { UPDATE_QUESTION } from './graphql/mutations';
 
-const QuizItem = ({ questionObj, color }) => {
+const QuizItem = ({ questionObj, color, isAdmin }) => {
   const [showModal, setShowModal] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
   const [isAnswered, setIsAnswered] = useState(false);
@@ -64,17 +64,19 @@ const QuizItem = ({ questionObj, color }) => {
               </table>
             ) : null}
 
-            <div className="buttons">
-              <button
-                className="button"
-                onClick={() => setShowPlayerAnswers(true)}
-              >
-                Show User answers
-              </button>
-              <button className="button" onClick={() => setShowAnswer(true)}>
-                Show correct answer
-              </button>
-            </div>
+            {isAdmin === 'admin' ? (
+              <div className="buttons">
+                <button
+                  className="button"
+                  onClick={() => setShowPlayerAnswers(true)}
+                >
+                  Show User answers
+                </button>
+                <button className="button" onClick={() => setShowAnswer(true)}>
+                  Show correct answer
+                </button>
+              </div>
+            ) : null}
           </div>
         </Modal>
       ) : null}

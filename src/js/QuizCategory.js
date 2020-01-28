@@ -3,7 +3,7 @@ import QuizItem from './QuizItem';
 import { GET_QUESTIONS_OF_CATEGORY } from './graphql/queries';
 import { useQuery } from '@apollo/react-hooks';
 
-const QuizCategory = ({ id, name, color }) => {
+const QuizCategory = ({ id, name, color, isAdmin }) => {
   const { loading, error, data } = useQuery(GET_QUESTIONS_OF_CATEGORY(id));
 
   if (loading) {
@@ -25,6 +25,7 @@ const QuizCategory = ({ id, name, color }) => {
           categoryID={id}
           color={color}
           questionObj={question}
+          isAdmin={isAdmin}
         />
       ))}
     </div>

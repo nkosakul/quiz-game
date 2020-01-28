@@ -3,7 +3,8 @@ import { useQuery } from '@apollo/react-hooks';
 import QuizCategory from './QuizCategory';
 import { GET_ALL_CATEGORIES } from './graphql/queries';
 
-const QuizBoard = () => {
+const QuizBoard = props => {
+  const isAdmin = props.admin;
   const { loading, error, data } = useQuery(GET_ALL_CATEGORIES);
 
   if (loading) {
@@ -19,7 +20,13 @@ const QuizBoard = () => {
   return (
     <div className="grid">
       {quizCategories.map(({ id, name, color }) => (
-        <QuizCategory key={id} color={color} id={id} name={name} />
+        <QuizCategory
+          key={id}
+          color={color}
+          id={id}
+          name={name}
+          isAdmin={isAdmin}
+        />
       ))}
     </div>
   );
