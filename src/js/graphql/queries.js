@@ -1,28 +1,5 @@
 import { gql } from 'apollo-boost';
 
-export const ALL_CATEGORIES = gql`
-  query getAllCategories {
-    allCategories {
-      data {
-        questions {
-          _id
-          id
-          question
-          type
-          answer
-          points
-          isActive
-          category
-        }
-        _id
-        id
-        title
-        color
-      }
-    }
-  }
-`;
-
 export const GET_PLAYER_BY_ID = id => gql`
   {
      findPlayerByID(id: "${id}") {
@@ -32,6 +9,20 @@ export const GET_PLAYER_BY_ID = id => gql`
        points
      }
    }
+`;
+
+export const GET_QUESTIONS_OF_CATEGORY = id => gql`
+  query GetQuestionRelatedToCategory {
+    question(where: {category: {_eq: ${id}}}) {
+      answer
+      id
+      isActive
+      category
+      points
+      question
+      type
+    }
+  }
 `;
 
 export const GET_ALL_CATEGORIES = gql`

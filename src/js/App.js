@@ -8,8 +8,6 @@ import QuizBoard from './QuizBoard';
 import Player from './Player';
 import '../styles/index.scss';
 
-console.log(client);
-
 const App = () => {
   return (
     <React.StrictMode>

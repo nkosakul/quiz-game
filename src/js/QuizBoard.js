@@ -13,18 +13,13 @@ const QuizBoard = () => {
   if (error) {
     return <p>error!</p>;
   }
+
   const quizCategories = data.category;
 
   return (
     <div className="grid">
-      {quizCategories.map(({ _id, title, color, questions }) => (
-        <QuizCategory
-          key={_id}
-          color={color}
-          id={_id}
-          title={title}
-          questions={questions}
-        />
+      {quizCategories.map(({ id, name, color }) => (
+        <QuizCategory key={id} color={color} id={id} name={name} />
       ))}
     </div>
   );
