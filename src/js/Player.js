@@ -31,3 +31,5 @@ const Player = () => {
 };
 
 export default Player;
+
+// TODO: add Timer for players

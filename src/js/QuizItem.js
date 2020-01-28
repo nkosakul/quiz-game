@@ -3,27 +3,17 @@ import { useMutation } from '@apollo/react-hooks';
 import Modal from './Modal';
 import { UPDATE_QUESTION } from './graphql/mutations';
 
-const QuizItem = ({ questionObj, categoryID, color }) => {
+const QuizItem = ({ questionObj, color }) => {
   const [showModal, setShowModal] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
   const [isAnswered, setIsAnswered] = useState(false);
   const [showPlayerAnswers, setShowPlayerAnswers] = useState(false);
-  const [updateQuestion] = useMutation(UPDATE_QUESTION);
+  const [updateQuestion] = useMutation(UPDATE_QUESTION(questionObj.id));
 
   const handleUpdateQuestion = isActive => {
-    const { _id, id, question, type, points, category, answer } = questionObj;
-
     updateQuestion({
       variables: {
-        _id,
-        id,
-        question,
-        type,
-        points,
-        category,
-        answer,
         isActive,
-        categoryID,
       },
     });
   };

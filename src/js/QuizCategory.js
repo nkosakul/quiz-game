@@ -21,7 +21,7 @@ const QuizCategory = ({ id, name, color }) => {
       <h2 className="quiz-title">{name}</h2>
       {questions.map(question => (
         <QuizItem
-          key={id}
+          key={question.id}
           categoryID={id}
           color={color}
           questionObj={question}

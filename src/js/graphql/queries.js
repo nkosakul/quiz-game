@@ -34,3 +34,11 @@ export const GET_ALL_CATEGORIES = gql`
     }
   }
 `;
+
+export const GET_ACTIVE_QUESTION = gql`
+  {
+    question(where: { isActive: { _eq: true } }) {
+      question
+    }
+  }
+`;
