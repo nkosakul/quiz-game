@@ -1,32 +1,50 @@
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useSubscription } from '@apollo/react-hooks';
 import Modal from './Modal';
-import { UPDATE_QUESTION } from './graphql/mutations';
+import {
+  UPDATE_QUESTION_ACTIVE,
+  UPDATE_QUESTION_ANSWERED,
+} from './graphql/mutations';
+import {
+  WATCH_ACTIVE_QUESTION,
+  WATCH_ANSWERED_QUESTION,
+} from './graphql/subscriptions';
 
 const QuizItem = ({ questionObj, color, isAdmin }) => {
   const [showModal, setShowModal] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
-  const [isAnswered, setIsAnswered] = useState(false);
   const [showPlayerAnswers, setShowPlayerAnswers] = useState(false);
-  const [updateQuestion] = useMutation(UPDATE_QUESTION(questionObj.id));
+  const { data, loading } = useSubscription(
+    WATCH_ANSWERED_QUESTION(questionObj.id)
+  );
+  const [updateQuestionActiveState] = useMutation(
+    UPDATE_QUESTION_ACTIVE(questionObj.id)
+  );
+  const [updateQuestionAnsweredState] = useMutation(
+    UPDATE_QUESTION_ANSWERED(questionObj.id)
+  );
 
-  const handleUpdateQuestion = isActive => {
-    updateQuestion({
+  const handleClosingModal = () => {
+    setShowModal(false);
+    updateQuestionActiveState({
       variables: {
-        isActive,
+        isActive: false,
+      },
+    });
+    updateQuestionAnsweredState({
+      variables: {
+        isAnswered: true,
       },
     });
   };
 
-  const handleClosingModal = () => {
-    setShowModal(false);
-    setIsAnswered(true);
-    handleUpdateQuestion(false);
-  };
-
   const handleOpenModal = () => {
     setShowModal(true);
-    handleUpdateQuestion(true);
+    updateQuestionActiveState({
+      variables: {
+        isActive: true,
+      },
+    });
   };
 
   return (
@@ -34,7 +52,11 @@ const QuizItem = ({ questionObj, color, isAdmin }) => {
       <button
         className={`button button--${color} button--fullwidth`}
         onClick={() => handleOpenModal()}
-        disabled={isAnswered}
+        disabled={
+          !loading && data.question.length > 0
+            ? data.question[0].isAnswered
+            : false
+        }
       >
         {questionObj.points}
       </button>

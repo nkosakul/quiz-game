@@ -9,7 +9,7 @@ require('dotenv').config();
 //TODO: https://docs.hasura.io/1.0/graphql/manual/guides/integrations/apollo-subscriptions.html
 const getHeaders = () => {
   return {
-    'X-Hasura-Admin-Secret': process.env.HASURA_ADMIN,
+    'X-Hasura-Admin-Secret': process.env.HASURA_ADMIN_KEY,
     'X-Hasura-Role': 'anonymous',
   };
 };
