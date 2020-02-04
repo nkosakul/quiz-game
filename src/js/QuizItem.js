@@ -4,28 +4,28 @@ import Modal from './Modal';
 import {
   UPDATE_QUESTION_ACTIVE,
   UPDATE_QUESTION_ANSWERED,
+  UPDATE_QUESTION_SHOW_ANSWER,
 } from './graphql/mutations';
-import {
-  WATCH_ACTIVE_QUESTION,
-  WATCH_ANSWERED_QUESTION,
-} from './graphql/subscriptions';
+import { WATCH_QUESTION } from './graphql/subscriptions';
 
 const QuizItem = ({ questionObj, color, isAdmin }) => {
-  const [showModal, setShowModal] = useState(false);
-  const [showAnswer, setShowAnswer] = useState(false);
   const [showPlayerAnswers, setShowPlayerAnswers] = useState(false);
-  const { data, loading } = useSubscription(
-    WATCH_ANSWERED_QUESTION(questionObj.id)
-  );
+  const { data, loading } = useSubscription(WATCH_QUESTION(questionObj.id));
   const [updateQuestionActiveState] = useMutation(
     UPDATE_QUESTION_ACTIVE(questionObj.id)
   );
   const [updateQuestionAnsweredState] = useMutation(
     UPDATE_QUESTION_ANSWERED(questionObj.id)
   );
+  const [updateQuestionShowAnswerState] = useMutation(
+    UPDATE_QUESTION_SHOW_ANSWER(questionObj.id)
+  );
+  const showModal =
+    !loading && data.question.length > 0 ? data.question[0].isActive : false;
+  const showAnswer =
+    !loading && data.question.length > 0 ? data.question[0].showAnswer : false;
 
   const handleClosingModal = () => {
-    setShowModal(false);
     updateQuestionActiveState({
       variables: {
         isActive: false,
@@ -39,10 +39,17 @@ const QuizItem = ({ questionObj, color, isAdmin }) => {
   };
 
   const handleOpenModal = () => {
-    setShowModal(true);
     updateQuestionActiveState({
       variables: {
         isActive: true,
+      },
+    });
+  };
+
+  const handleShowAnswer = () => {
+    updateQuestionShowAnswerState({
+      variables: {
+        showAnswer: true,
       },
     });
   };
@@ -94,7 +101,7 @@ const QuizItem = ({ questionObj, color, isAdmin }) => {
                 >
                   Show User answers
                 </button>
-                <button className="button" onClick={() => setShowAnswer(true)}>
+                <button className="button" onClick={() => handleShowAnswer()}>
                   Show correct answer
                 </button>
               </div>

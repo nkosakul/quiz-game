@@ -8,11 +8,12 @@ export const WATCH_ACTIVE_QUESTION = gql`
   }
 `;
 
-export const WATCH_ANSWERED_QUESTION = id => gql`
+export const WATCH_QUESTION = id => gql`
   subscription MySubscription {
-  question(where: {id: {_eq: ${id}}, isAnswered: {_eq: true}}) {
-    isAnswered
+    question(where: {id: {_eq: ${id}}}) {
+      isActive
+      isAnswered
+      showAnswer
+    }
   }
-}
-
 `;

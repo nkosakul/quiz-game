@@ -21,3 +21,14 @@ export const UPDATE_QUESTION_ANSWERED = id => gql`
     }
   }
 `;
+
+export const UPDATE_QUESTION_SHOW_ANSWER = id => gql`
+  mutation UpdateAnsweredQuestion($showAnswer: Boolean!) {
+    update_question(where: {id: {_eq: ${id}}}, _set: {showAnswer: $showAnswer}) {
+      affected_rows
+      returning {
+        showAnswer
+      }
+    }
+  }
+`;
