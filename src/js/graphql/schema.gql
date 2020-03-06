@@ -12,6 +12,7 @@ type Question {
    answer: String!
    points: Int!
    isActive: Boolean!
+   isAnswered: Boolean!
 }
 
 type Player {
